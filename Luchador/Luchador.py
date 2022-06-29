@@ -1,3 +1,4 @@
+from __future__ import annotations
 import abc
 
 
@@ -20,4 +21,8 @@ class Luchador(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def reduce_hp(self, damage: float):
+        pass
+
+    @abc.abstractmethod
+    def compute_damage(self, enemy: Luchador):
         pass
