@@ -1,7 +1,7 @@
-from Luchador.Luchador import Luchador
+from luchador.luchador import Luchador
 
 
-class Luchador1(Luchador):
+class Luchador2(Luchador):
     def __init__(self, atq, defensa, velocidad):
         self.__hp: float = 100
         self.__atq: float = atq
