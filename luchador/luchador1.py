@@ -1,4 +1,4 @@
-from Luchador.luchador import Luchador
+from luchador.luchador import Luchador
 
 
 class Luchador1(Luchador):
@@ -26,6 +26,8 @@ class Luchador1(Luchador):
     def compute_damage(self, enemy: Luchador) -> float:
         if enemy.get_hp() < (self.get_atq() - enemy.get_def()):
             return enemy.get_hp()
+        elif enemy.get_def() > self.get_atq():
+            return self.get_atq() * 0.1
         else:
             return self.get_atq() - enemy.get_def()
 

@@ -1,4 +1,4 @@
-from Luchador.luchador import Luchador
+from luchador.luchador import Luchador
 
 
 class Luchador4(Luchador):

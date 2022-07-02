@@ -1,8 +1,8 @@
-from Luchador.luchador import Luchador
-from Luchador.luchador1 import Luchador1
-from Luchador.luchador2 import Luchador2
-from Luchador.luchador3 import Luchador3
-from Luchador.luchador4 import Luchador4
+from luchador.luchador import Luchador
+from luchador.luchador1 import Luchador1
+from luchador.luchador2 import Luchador2
+from luchador.luchador3 import Luchador3
+from luchador.luchador4 import Luchador4
 import random
 from typing import List
 from decorator.armadura import Armadura
