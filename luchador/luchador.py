@@ -28,5 +28,5 @@ class Luchador(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def modificar(self, ataque, defensa, velocidad):
+    def modificar(self, ataque, defensa, velocidad, hp):
         raise NotImplementedError

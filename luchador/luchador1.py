@@ -31,7 +31,8 @@ class Luchador1(Luchador):
         else:
             return self.get_atq() - enemy.get_def()
 
-    def modificar(self, ataque, defensa, velocidad):
+    def modificar(self, ataque, defensa, velocidad, hp):
         self.__atq = ataque
         self.__def = defensa
         self.__velocidad = velocidad
+        self.__hp = hp
