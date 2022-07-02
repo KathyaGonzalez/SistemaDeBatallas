@@ -1,9 +1,9 @@
-from luchador.luchador import Luchador
+from Luchador.luchador import Luchador
 
 
 class Luchador4(Luchador):
     def __init__(self, atq, defensa, velocidad):
-        self.__hp: float = 100
+        self.__hp: float = 70
         self.__atq: float = atq
         self.__def: float = defensa
         self.__velocidad: float = velocidad
@@ -24,7 +24,12 @@ class Luchador4(Luchador):
         self.__hp -= damage
 
     def compute_damage(self, enemy: Luchador) -> float:
-        if enemy.get_hp() < self.get_atq():
+        if enemy.get_hp() < ((self.get_atq() / enemy.get_def())*5):
             return enemy.get_hp()
         else:
-            return self.get_atq()
+            return (self.get_atq() / enemy.get_def())*5
+
+    def modificar(self, ataque, defensa, velocidad):
+        self.__atq = ataque
+        self.__def = defensa
+        self.__velocidad = velocidad

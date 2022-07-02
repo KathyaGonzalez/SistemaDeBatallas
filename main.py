@@ -1,8 +1,8 @@
-from luchador.luchador import Luchador
-from luchador.luchador1 import Luchador1
-from luchador.luchador2 import Luchador2
-from luchador.luchador3 import Luchador3
-from luchador.luchador4 import Luchador4
+from Luchador.luchador import Luchador
+from Luchador.luchador1 import Luchador1
+from Luchador.luchador2 import Luchador2
+from Luchador.luchador3 import Luchador3
+from Luchador.luchador4 import Luchador4
 import random
 from typing import List
 from decorator.armadura import Armadura
@@ -31,23 +31,25 @@ items: dict = {
 def combate(personaje1: Luchador, personaje2: Luchador):
     opcion_combate = 0
     orden_ataque: List
-    print(f'Velocidad de Jugador 1: {personaje1.get_velocidad()}')
-    print(f'Velocidad de Jugador 2: {personaje2.get_velocidad()}')
     if personaje1.get_velocidad() > personaje2.get_velocidad():
         print('Jugador 1 ataca primero')
         orden_ataque: List = [personaje1, personaje2]
+        orden_jugadores: List = ['Jugador 1', 'Jugador 2']
     else:
         if personaje1.get_velocidad() == personaje2.get_velocidad():
             aleatorio = random.randint(1, 2)
             if aleatorio == 1:
                 orden_ataque: List = [personaje1, personaje2]
+                orden_jugadores: List = ['Jugador 1', 'Jugador 2']
                 print('Jugador 1 ataca primero (aleatorio)')
             else:
                 orden_ataque: List = [personaje2, personaje1]
+                orden_jugadores: List = ['Jugador 2', 'Jugador 1']
                 print('Jugador 2 ataca primero (aleatorio)')
         else:
             print('Jugador 2 ataca primero')
             orden_ataque: List = [personaje2, personaje1]
+            orden_jugadores: List = ['Jugador 2', 'Jugador 1']
     while opcion_combate != 2:
         print('---------------------------------------------------------------------------------')
         print('1. Atacar\n2. Salir')
@@ -58,17 +60,19 @@ def combate(personaje1: Luchador, personaje2: Luchador):
             segundo.reduce_hp(primero.compute_damage(segundo))
             primero.reduce_hp(segundo.compute_damage(primero))
             print('---------------------------------------------------------------------------------')
-            print(f'Personaje 1 -> Puntos de vida: {primero.get_hp()}')
-            print(f'Personaje 2 -> Puntos de vida: {segundo.get_hp()}')
-            if primero.get_hp() == 0:
+            print(f'Personaje {orden_jugadores.__getitem__(0)} - ({primero.__class__.__name__})-> Puntos de vida: '
+                  f'{primero.get_hp()}')
+            print(f'Personaje {orden_jugadores.__getitem__(1)} - ({segundo.__class__.__name__})-> Puntos de vida: '
+                  f'{segundo.get_hp()}')
+            if primero.get_hp() <= 0:
                 print('---------------------------------------------------------------------------------')
-                print(f'Partida terminada - Ha muerto {primero.__class__.__name__} (Jugador 1)')
-                print(f'Ganador: {segundo.__class__.__name__} (Jugador 2)')
+                print(f'Partida terminada - Ha muerto {primero.__class__.__name__} ({orden_jugadores.__getitem__(0)})')
+                print(f'Ganador: {segundo.__class__.__name__} ({orden_jugadores.__getitem__(1)})')
                 opcion_combate = 2
-            if segundo.get_hp() == 0:
+            if segundo.get_hp() <= 0:
                 print('---------------------------------------------------------------------------------')
-                print(f'Partida terminada - Ha muerto {segundo.__class__.__name__} (Jugador 2)')
-                print(f'Ganador: {primero.__class__.__name__} (Jugador 1)')
+                print(f'Partida terminada - Ha muerto {segundo.__class__.__name__} ({orden_jugadores.__getitem__(1)})')
+                print(f'Ganador: {primero.__class__.__name__} ({orden_jugadores.__getitem__(0)})')
                 opcion_combate = 2
         else:
             print('Terminando combate...')
@@ -132,17 +136,25 @@ while opcion != 2:
     if opcion == 1:
         print('---------------------------------------------------------------------------------')
         print('Seleccionar personaje jugador 1')
-        print('1. luchador 1\n2. luchador 2\n3. luchador 3\n4. luchador 4')
+        print('1. Luchador 1\n2. Luchador 2\n3. Luchador 3\n4. Luchador 4')
         opcion_personaje1 = int(input('Ingrese el número de la opción del personaje que desea utilizar el Jugador 1: '))
         opcion_personaje2 = int(input('Ingrese el número de la opción del personaje que desea utilizar el Jugador 2: '))
         personaje_1 = crear_personaje(opcion_personaje1)
         personaje_2 = crear_personaje(opcion_personaje2)
         print('---------------------------------------------------------------------------------')
         print('Seleccion de Items - Jugador 1')
-        personaje_1 = seleccionar_decorador(personaje_1)
+        decorador = seleccionar_decorador(personaje_1)
+        ataque = decorador.get_atq()
+        defensa = decorador.get_def()
+        velocidad = decorador.get_velocidad()
+        personaje_1.modificar(ataque, defensa, velocidad)
         print('---------------------------------------------------------------------------------')
         print('Seleccion de Items - Jugador 2')
-        personaje_2 = seleccionar_decorador(personaje_2)
+        decorador = seleccionar_decorador(personaje_2)
+        ataque = decorador.get_atq()
+        defensa = decorador.get_def()
+        velocidad = decorador.get_velocidad()
+        personaje_2.modificar(ataque, defensa, velocidad)
         combate(personaje_1, personaje_2)
     elif opcion == 2:
         print('Cerrando sesión...')

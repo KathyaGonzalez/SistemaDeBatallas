@@ -1,5 +1,5 @@
 from decorator.luchadorDecorator import LuchadorDecorator
-from luchador.luchador import Luchador
+from Luchador.luchador import Luchador
 
 
 class Armadura(LuchadorDecorator):

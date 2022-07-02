@@ -1,4 +1,4 @@
-from luchador.luchador import Luchador
+from Luchador.luchador import Luchador
 
 
 class LuchadorDecorator(Luchador):
@@ -23,3 +23,6 @@ class LuchadorDecorator(Luchador):
 
     def compute_damage(self, enemy: Luchador):
         return self.luchador.compute_damage(enemy)
+
+    def modificar(self, ataque, defensa, velocidad):
+        pass

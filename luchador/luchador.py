@@ -26,3 +26,7 @@ class Luchador(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def compute_damage(self, enemy: Luchador):
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def modificar(self, ataque, defensa, velocidad):
+        raise NotImplementedError
